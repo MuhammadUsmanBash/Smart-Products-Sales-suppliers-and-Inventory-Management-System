@@ -12,6 +12,7 @@ import toastMessage from '../../lib/toastMessage';
 import SearchInput from '../../components/SearchInput';
 
 const SellerManagementPage = () => {
+  const [current, setCurrent] = useState(1);
   const [query, setQuery] = useState({
     page: 1,
     limit: 10,
@@ -21,7 +22,8 @@ const SellerManagementPage = () => {
   const { data, isFetching } = useGetAllSellerQuery(query);
 
   const onChange: PaginationProps['onChange'] = (page) => {
-    setQuery((prev) => ({ ...prev, page: page }));
+    setCurrent(page);
+    setQuery(prev => ({ ...prev, page }));
   };
 
   const tableData = data?.data?.map((seller: ISeller) => ({

@@ -25,12 +25,14 @@ const ProductManagePage = () => {
     category: '',
     brand: '',
     limit: 10,
+    page: 1,
   });
 
   const { data: products, isFetching } = useGetAllProductsQuery(query);
 
   const onChange: PaginationProps['onChange'] = (page) => {
     setCurrent(page);
+    setQuery(prev => ({ ...prev, page }));
   };
 
   const tableData = products?.data?.map((product: IProduct) => ({
